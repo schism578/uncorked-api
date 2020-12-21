@@ -1,26 +1,89 @@
-# Express Boilerplate!
+<!-- <img src='./images/favicon.jpg' alt='app icon' width='150'/>
 
-This is a boilerplate project used for starting new projects!
+# YouMove API  
 
-## Set up
+### Use: Provides JWT auth for registering users, secure login, and protected endpoints. Provides database for user profile information and daily calorie logging history.  
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## API Documentation:  
+### Create User Endpoint
+#### `POST /user`  
+&nbsp;&nbsp;&nbsp;Creates user profile storing all profile info in Express database with hash encrypted password.
+#### Sample Request:  
+&nbsp;&nbsp;&nbsp;newUser: {  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first_name: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last_name: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: integer required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight: integer required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age: integer required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bmr: integer required  
+}  
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
-
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+#### Sample Response:  
+&nbsp;&nbsp;&nbsp;newUser: {  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_id: generated integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first_name: text,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last_name: text,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: text,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: text,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gender: text,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bmr: integer  
+}  
+  
+### Login Endpoint  
+#### `POST /auth/login`  
+&nbsp;&nbsp;&nbsp;Provides bcrypted secure login with JWT auth token protection.  
+#### Sample Request:  
+&nbsp;&nbsp;&nbsp;{  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: text required,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: text required  
+&nbsp;&nbsp;&nbsp;}
+#### Sample Response:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authToken: string  
+&nbsp;&nbsp;&nbsp;Object: {  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date: `date` format,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_id: integer  
+&nbsp;&nbsp;&nbsp;}  
+  
+### Calorie Log Endpoints  
+#### `GET /log/:user_id`  
+&nbsp;&nbsp;&nbsp;Retrieves a collection of response objects of the user's calorie logs since their profile was created. Requires authentication.  
+#### Sample Request:  
+&nbsp;&nbsp;&nbsp;{  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_id: integer required,  
+&nbsp;&nbsp;&nbsp;}  
+#### Sample Response:  
+&nbsp;&nbsp;&nbsp;Object(s): {  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date: `date` format,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_id: integer  
+&nbsp;&nbsp;&nbsp;}  
+#### `POST /log/:user_id`  
+&nbsp;&nbsp;&nbsp;Saves daily calorie logs to the logged in user's profile. Requires authentication.  
+#### Sample Request:  
+&nbsp;&nbsp;&nbsp;{  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: string required,  
+&nbsp;&nbsp;&nbsp;}  
+#### Sample Response:  
+&nbsp;&nbsp;&nbsp;Object(s): {  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date: `date` format,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: integer,  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_id: integer  
+&nbsp;&nbsp;&nbsp;}  
+  
+### Technologies:  
+&nbsp;&nbsp;&nbsp;**Express**  
+&nbsp;&nbsp;&nbsp;**Node**  
+&nbsp;&nbsp;&nbsp;**Knex**  
+&nbsp;&nbsp;&nbsp;**Postgrator**  
+&nbsp;&nbsp;&nbsp;**Mocha, Chai, Supertest**  
+&nbsp;&nbsp;&nbsp;**JSON Web Token, bcryptjs**  -->
