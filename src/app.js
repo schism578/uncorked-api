@@ -4,20 +4,27 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
+const userRouter = require('./user/user-router')
+const wineRouter = require('./wine/wine-router')
+const authRouter = require('./auth/auth-router')
 
 const app = express()
 
-const morganOption = (NODE_ENV === 'production')
+const morganSetting = (process.env.NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption))
+app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
+
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
+app.use('/wine', wineRouter)
 
 app.use(function errorHandler(error, req, res, next) {
         let response
