@@ -50,7 +50,7 @@ describe('Auth Endpoints', function() {
                 })
             })
         })
-            it(`responds 400 'invalid username or password' when bad email`, () => {
+            it(`responds 400 'invalid username or password' when bad username`, () => {
                 const userInvalidUsername = { username: 'username-not', password: 'existy' }
                 return supertest(app)
                 .post('/auth/login')
