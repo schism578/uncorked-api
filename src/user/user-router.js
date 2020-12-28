@@ -15,11 +15,16 @@ const serializeUser = user => ({
 
 userRouter
   .route('/')
-  .get((req, res, next) => {
-    const knexInstance = req.app.get('db')
-    UserService.getUser(knexInstance)
-      .then(user => {
-        res.json(user.map(serializeUser))
+  .get(requireAuth, (req, res, next) => {
+    res.json(req.user)
+  })
+  .delete(requireAuth, (req, res, next) => {
+    UserService.deleteUser(
+      req.app.get('db'),
+      req.user.user_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
       })
       .catch(next)
   })

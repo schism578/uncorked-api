@@ -38,7 +38,16 @@ const wineService = {
             .select('*')
             .from('wine')
             .where('user_id', user_id)
-    }
+    },
+    searchWine(searchTerm) {
+        return knex('wine')
+          .select('wine_type', 'winemaker', 'wine_name', 'varietal', 'vintage', 'region', 'tasting_notes', 'rating')
+          .from('wine')
+          .where('name', 'ILIKE', `%${searchTerm}%`)
+          .then(res => {
+            res.json(res)
+          })
+      },
 };
 
 module.exports = wineService;
