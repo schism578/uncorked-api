@@ -31,7 +31,7 @@ wineRouter
       })
       .catch(next)
   })
-  .get('/search', (req, res, next) => {
+  /*.get('/search', (req, res, next) => {
     const knexInstance = req.app.get('db');
     wineService.searchWine(knexInstance, req.params.searchTerm)
       .then(wine => {
@@ -79,7 +79,7 @@ wineRouter
         }
       })
       .catch(next)
-  })
+  })*/
   .post(requireAuth, jsonParser, (req, res, next) => {
     const { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating } = req.body
     const newWine = { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating }
