@@ -3,6 +3,7 @@ const express = require('express')
 const wineService = require('./wine-service')
 const { requireAuth } = require('../middleware/jwt-auth')
 const { searchWine } = require('./wine-service')
+const { response } = require('express')
 
 const wineRouter = express.Router()
 const jsonParser = express.json()
@@ -21,7 +22,9 @@ const serializeWine = wine => ({
   wine_id: wine.wine_id,
 })
 wineRouter
-.get('/search', (req, res, next) => {
+.route('/search')
+.all(requireAuth)
+.get((req, res, next) => {
   /*let response = wine;
   if (req.query.wine_type) {
     response = response.filter(wine =>
@@ -33,9 +36,9 @@ wineRouter
       wine.winemaker.toLowerCase().includes(req.query.winemaker.toLowerCase())
     )
   }
-  if (req.query.wine_name) {
+  if (req.wine_name) {
     response = response.filter(wine =>
-      wine.wine_name.toLowerCase().includes(req.query.wine_name.toLowerCase())
+      wine.wine_name.toLowerCase().includes(req.wine_name.toLowerCase())
     )
   }
   if (req.query.varietal) {
