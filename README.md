@@ -1,4 +1,4 @@
-<!-- <img src='./images/favicon.jpg' alt='app icon' width='150'/>
+<img src='./images/favicon.jpg' alt='app icon' width='150'/>
 
 # YouMove API  
 
@@ -86,4 +86,4 @@
 &nbsp;&nbsp;&nbsp;**Knex**  
 &nbsp;&nbsp;&nbsp;**Postgrator**  
 &nbsp;&nbsp;&nbsp;**Mocha, Chai, Supertest**  
-&nbsp;&nbsp;&nbsp;**JSON Web Token, bcryptjs**  -->
+&nbsp;&nbsp;&nbsp;**JSON Web Token, bcryptjs**
