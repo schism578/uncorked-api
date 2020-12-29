@@ -20,7 +20,56 @@ const serializeWine = wine => ({
   user_id: wine.user_id,
   wine_id: wine.wine_id,
 })
-
+wineRouter
+.get('/search', (req, res, next) => {
+  /*let response = wine;
+  if (req.query.wine_type) {
+    response = response.filter(wine =>
+      wine.wine_type.toLowerCase().includes(req.query.wine_type.toLowerCase())
+    )
+  }
+  if (req.query.winemaker) {
+    response = response.filter(wine =>
+      wine.winemaker.toLowerCase().includes(req.query.winemaker.toLowerCase())
+    )
+  }
+  if (req.query.wine_name) {
+    response = response.filter(wine =>
+      wine.wine_name.toLowerCase().includes(req.query.wine_name.toLowerCase())
+    )
+  }
+  if (req.query.varietal) {
+    response = response.filter(wine =>
+      wine.varietal.toLowerCase().includes(req.query.varietal.toLowerCase())
+    )
+  }
+  if (req.query.vintage) {
+    response = response.filter(wine =>
+      wine.vintage.toLowerCase().includes(req.query.vintage.toLowerCase())
+    )
+  }
+  if (req.query.region) {
+    response = response.filter(wine =>
+      wine.region.toLowerCase().includes(req.query.region.toLowerCase())
+    )
+  }
+  if (req.query.tasting_notes) {
+    response = response.filter(wine =>
+      wine.tasting_notes.toLowerCase().includes(req.query.tasting_notes.toLowerCase())
+    )
+  }
+  if (req.query.rating) {
+    response = response.filter(wine =>
+      Number(wine.rating) >= Number(req.query.rating)
+    )
+  }*/
+  const knexInstance = req.app.get('db');
+  wineService.searchWine(knexInstance, req.params.searchTerm)
+    .then(wine => {
+      res.json(wine.map(serializeWine))
+    })
+    .catch(next)
+})
 wineRouter
   .route('/:user_id')
   .all(requireAuth)
@@ -32,58 +81,9 @@ wineRouter
       })
       .catch(next)
   })
-  /*.get('/search', (req, res, next) => {
-    let response = wine;
-    if (req.query.wine_type) {
-      response = response.filter(wine =>
-        wine.wine_type.toLowerCase().includes(req.query.wine_type.toLowerCase())
-      )
-    }
-    if (req.query.winemaker) {
-      response = response.filter(wine =>
-        wine.winemaker.toLowerCase().includes(req.query.winemaker.toLowerCase())
-      )
-    }
-    if (req.query.wine_name) {
-      response = response.filter(wine =>
-        wine.wine_name.toLowerCase().includes(req.query.wine_name.toLowerCase())
-      )
-    }
-    if (req.query.varietal) {
-      response = response.filter(wine =>
-        wine.varietal.toLowerCase().includes(req.query.varietal.toLowerCase())
-      )
-    }
-    if (req.query.vintage) {
-      response = response.filter(wine =>
-        wine.vintage.toLowerCase().includes(req.query.vintage.toLowerCase())
-      )
-    }
-    if (req.query.region) {
-      response = response.filter(wine =>
-        wine.region.toLowerCase().includes(req.query.region.toLowerCase())
-      )
-    }
-    if (req.query.tasting_notes) {
-      response = response.filter(wine =>
-        wine.tasting_notes.toLowerCase().includes(req.query.tasting_notes.toLowerCase())
-      )
-    }
-    if (req.query.rating) {
-      response = response.filter(wine =>
-        Number(wine.rating) >= Number(req.query.rating)
-      )
-    }
-    const knexInstance = req.app.get('db');
-    wineService.searchWine(knexInstance, req.params.searchTerm)
-      .then(() => {
-        res.json(response)
-      })
-      .catch(next)
-  })*/
   .post(requireAuth, jsonParser, (req, res, next) => {
-    const { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating } = req.body
-    const newWine = { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating }
+    const { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating, img_url } = req.body
+    const newWine = { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating, img_url }
 
     for (const [key, value] of Object.entries(newWine))
       if (value == null)
