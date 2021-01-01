@@ -24,14 +24,9 @@ wineRouter
 .all(requireAuth)
 .get((req, res, next) => {
   const searchTerm = req.query;
-  console.log(searchTerm)
-  /*for (const key in req.query) {
-    console.log(key, req.query[key])
-  }  */
   const knexInstance = req.app.get('db');
   wineService.searchWine(knexInstance, searchTerm, req.user.user_id)
     .then(wine => {
-      console.log(wine)
       res.json(wine.map(serializeWine))
     })
     .catch(next)

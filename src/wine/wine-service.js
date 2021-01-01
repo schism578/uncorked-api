@@ -45,7 +45,7 @@ const wineService = {
         .from('wine')
         .where('wine_type', 'LIKE', `%${searchTerm.wine_type || ''}%`)
         .where('user_id', '=', user_id)
-        .where('wine_name', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('wine_name', 'LIKE', `%${searchTerm || ''}%`)
         //.where('winemaker', 'LIKE', `%${searchTerm || ''}%`)
         //.where('varietal', 'LIKE', `%${searchTerm || ''}%`)
         //.where('region', 'LIKE', `%${searchTerm || ''}%`)
