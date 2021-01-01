@@ -44,8 +44,8 @@ wineRouter
       .catch(next)
   })
   .post(requireAuth, jsonParser, (req, res, next) => {
-    const { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating, img_url } = req.body
-    const newWine = { winemaker, wine_type, wine_name, varietal, region, tasting_notes, rating, img_url }
+    const { winemaker, wine_type, wine_name, varietal, vintage, region, tasting_notes, rating, img_url } = req.body
+    const newWine = { winemaker, wine_type, wine_name, varietal, vintage, region, tasting_notes, rating, img_url }
 
     for (const [key, value] of Object.entries(newWine))
       if (value == null)
