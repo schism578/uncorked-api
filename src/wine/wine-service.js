@@ -50,8 +50,8 @@ const wineService = {
         .where('varietal', 'LIKE', `%${searchTerm.varietal || ''}%`)
         .where('region', 'LIKE', `%${searchTerm.region || ''}%`)
         .where('tasting_notes', 'LIKE', `%${searchTerm.tasting_notes || ''}%`)
-        //.where('vintage', '=', `%${searchTerm.vintage || ''}%`)
-        //.where('rating', '=', `%${searchTerm.rating || ''}%`)
+        .where('vintage', '=', `${searchTerm.vintage} || ''`)
+        .where('rating', '=', `${searchTerm.rating} || ''`)
     },
 };
 
