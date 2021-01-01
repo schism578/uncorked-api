@@ -39,12 +39,20 @@ const wineService = {
             .from('wine')
             .where('user_id', user_id)
     },
-    searchWine(knex, searchTerm) {
-        return knex('wine')
-          .select('wine_type', 'winemaker', 'wine_name', 'varietal', 'vintage', 'region', 'tasting_notes', 'rating')
-          .from('wine')
-          .where('wine_name', 'ILIKE', `%${searchTerm}%`)
-      },
+    searchWine(knex, searchTerm, user_id) {
+        return knex
+        .select('wine_type', 'winemaker', 'wine_name', 'varietal', 'vintage', 'region', 'tasting_notes', 'rating')
+        .from('wine')
+        .where('wine_type', 'LIKE', `%${searchTerm.wine_type || ''}%`)
+        .where('user_id', '=', user_id)
+        //.where('wine_name', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('winemaker', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('varietal', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('region', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('tasting_notes', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('cast(vintage AS TEXT)', 'LIKE', `%${searchTerm || ''}%`)
+        //.where('cast(rating AS TEXT)', 'LIKE', `%${searchTerm || ''}%`)
+    },
 };
 
 module.exports = wineService;
