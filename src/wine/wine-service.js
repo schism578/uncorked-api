@@ -43,15 +43,15 @@ const wineService = {
         return knex
         .select('wine_type', 'winemaker', 'wine_name', 'varietal', 'vintage', 'region', 'tasting_notes', 'rating')
         .from('wine')
-        .where('wine_type', 'LIKE', `%${searchTerm.wine_type || ''}%`)
         .where('user_id', '=', user_id)
-        //.where('wine_name', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('winemaker', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('varietal', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('region', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('tasting_notes', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('cast(vintage AS TEXT)', 'LIKE', `%${searchTerm || ''}%`)
-        //.where('cast(rating AS TEXT)', 'LIKE', `%${searchTerm || ''}%`)
+        .where('wine_type', 'LIKE', `%${searchTerm.wine_type || ''}%`)
+        .where('wine_name', 'LIKE', `%${searchTerm.wine_name || ''}%`)
+        .where('winemaker', 'LIKE', `%${searchTerm.winemaker || ''}%`)
+        .where('varietal', 'LIKE', `%${searchTerm.varietal || ''}%`)
+        .where('region', 'LIKE', `%${searchTerm.region || ''}%`)
+        .where('tasting_notes', 'LIKE', `%${searchTerm.tasting_notes || ''}%`)
+        //.where('vintage', '=', `%${searchTerm.vintage || ''}%`)
+        //.where('rating', '=', `%${searchTerm.rating || ''}%`)
     },
 };
 
