@@ -114,8 +114,6 @@ userRouter
         username: currentUser.username.value, 
         password: currentUser.password.value, 
     }
-    console.log(userToUpdate)
-    console.log(req.body)
     const numberOfValues = Object.values(userToUpdate).length
     if (numberOfValues === 0)
       return res.status(400).json({
